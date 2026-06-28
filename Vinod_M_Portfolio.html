@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinod M — Data Analyst Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #2563EB;
+      --primary-light: #EFF6FF;
+      --dark: #0F172A;
+      --gray: #475569;
+      --light-gray: #F8FAFC;
+      --border: #E2E8F0;
+      --accent: #0EA5E9;
+      --success: #10B981;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: #fff; line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+      z-index: 100; padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; display: flex;
+      justify-content: space-between; align-items: center; height: 64px;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.2rem; color: var(--primary); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, #EFF6FF 0%, #F0F9FF 50%, #F0FDF4 100%);
+      padding: 80px 2rem 4rem;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--primary-light); color: var(--primary);
+      padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.8rem; font-weight: 600;
+      margin-bottom: 1.5rem; border: 1px solid #BFDBFE;
+    }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { font-size: 1.05rem; color: var(--gray); margin-bottom: 2rem; max-width: 480px; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary); color: #fff; padding: 0.75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      transition: background 0.2s, transform 0.1s; display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: #1D4ED8; transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid var(--primary); color: var(--primary); padding: 0.75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline:hover { background: var(--primary-light); }
+
+    /* Hero stats card */
+    .hero-card {
+      background: #fff; border-radius: 20px; padding: 2rem;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.12); border: 1px solid var(--border);
+    }
+    .hero-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-bottom: 1.5rem; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .stat-item { text-align: center; padding: 1rem; background: var(--light-gray); border-radius: 12px; }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 0.75rem; color: var(--gray); margin-top: 0.2rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag {
+      background: var(--primary-light); color: var(--primary);
+      padding: 0.3rem 0.75rem; border-radius: 99px; font-size: 0.78rem; font-weight: 500;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 1rem; }
+    .section-sub { color: var(--gray); max-width: 540px; margin-bottom: 3rem; }
+
+    /* SKILLS */
+    #skills { background: var(--light-gray); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: #fff; border-radius: 14px; padding: 1.5rem;
+      border: 1px solid var(--border); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { box-shadow: 0 8px 30px rgba(37,99,235,0.1); transform: translateY(-3px); }
+    .skill-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .skill-card h4 { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .skill-card p { font-size: 0.9rem; color: var(--dark); line-height: 1.5; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .project-card {
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 16px 40px rgba(37,99,235,0.12); transform: translateY(-4px); }
+    .project-header { padding: 2rem 2rem 1rem; background: linear-gradient(135deg, var(--primary-light), #F0F9FF); }
+    .project-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+    .project-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-body { padding: 1.5rem 2rem 2rem; }
+    .project-body p { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
+    .project-body ul { padding-left: 1.2rem; color: var(--gray); font-size: 0.88rem; margin-bottom: 1.25rem; }
+    .project-body li { margin-bottom: 0.4rem; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .tech-chip {
+      background: #F1F5F9; color: #334155; padding: 0.25rem 0.65rem;
+      border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--primary); font-weight: 600; font-size: 0.88rem; text-decoration: none;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--light-gray); }
+    .exp-card {
+      background: #fff; border-radius: 16px; padding: 2.5rem;
+      border: 1px solid var(--border); max-width: 800px;
+      border-left: 4px solid var(--primary);
+    }
+    .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .exp-title { font-size: 1.25rem; font-weight: 700; }
+    .exp-company { color: var(--primary); font-weight: 600; }
+    .exp-date { background: var(--primary-light); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 99px; font-size: 0.8rem; font-weight: 600; align-self: flex-start; }
+    .exp-list { padding-left: 1.2rem; color: var(--gray); }
+    .exp-list li { margin-bottom: 0.6rem; font-size: 0.92rem; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: 800px; }
+    .contact-card {
+      background: var(--light-gray); border-radius: 14px; padding: 1.5rem;
+      border: 1px solid var(--border); display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .contact-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.1); transform: translateY(-2px); }
+    .contact-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .contact-icon.blue { background: #DBEAFE; }
+    .contact-icon.green { background: #D1FAE5; }
+    .contact-icon.purple { background: #EDE9FE; }
+    .contact-info h4 { font-weight: 600; font-size: 0.9rem; }
+    .contact-info p { color: var(--gray); font-size: 0.8rem; }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: #94A3B8; text-align: center; padding: 2rem; font-size: 0.85rem; }
+    footer span { color: #fff; font-weight: 600; }
+
+    /* AVAILABLE BADGE */
+    .available { display: inline-flex; align-items: center; gap: 0.5rem; background: #D1FAE5; color: #065F46; padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem; }
+    .dot { width: 8px; height: 8px; background: #10B981; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Vinod M</a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="available"><span class="dot"></span> Available for Hire</div>
+      <div class="hero-badge">🎓 MCA Graduate · JNTU Anantapur · 79%</div>
+      <h1>Data Analyst<br/><span>turning data into</span><br/>decisions</h1>
+      <p>MCA graduate skilled in Python, SQL, Power BI, and Machine Learning. Experienced in building dashboards, cleaning datasets, and delivering business insights through analytics.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">🚀 View Projects</a>
+        <a href="mailto:mopurivinod6788@gmail.com" class="btn-outline">📬 Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Quick Profile</h3>
+      <div class="stat-grid">
+        <div class="stat-item"><div class="stat-num">79%</div><div class="stat-label">MCA Score</div></div>
+        <div class="stat-item"><div class="stat-num">4mo</div><div class="stat-label">Internship</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">ML Projects</div></div>
+        <div class="stat-item"><div class="stat-num">50K+</div><div class="stat-label">Rows Analyzed</div></div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Tableau</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">What I Work With</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-sub">A focused toolkit for data analysis, visualization, and machine learning.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h4>Programming</h4>
+        <p>Python · SQL</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Visualization & BI</h4>
+        <p>Power BI · Tableau · Matplotlib · Seaborn · Excel</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h4>ML & Libraries</h4>
+        <p>Scikit-learn · Pandas · NumPy · SMOTE</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h4>Databases</h4>
+        <p>MySQL · PostgreSQL</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔧</div>
+        <h4>Tools</h4>
+        <p>Jupyter Notebook · VS Code · GitHub · Streamlit</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <h4>Analytics</h4>
+        <p>KPI Reporting · Data Cleaning · Business Insights · Forecasting</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Real-world datasets, end-to-end analysis, and machine learning solutions.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-emoji">📦</span>
+          <h3>E-commerce Sales Analysis & Forecasting</h3>
+        </div>
+        <div class="project-body">
+          <p>Analyzed 50K+ sales transactions to identify customer purchase patterns and predict future revenue trends.</p>
+          <ul>
+            <li>Customer segmentation and churn prediction using ML classification</li>
+            <li>Interactive Power BI dashboards for KPI tracking</li>
+            <li>SQL queries for aggregation, joins, and trend analysis</li>
+            <li>Data cleaning and transformation using Pandas</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">SQL</span>
+            <span class="tech-chip">Power BI</span>
+            <span class="tech-chip">Scikit-learn</span>
+            <span class="tech-chip">Pandas</span>
+          </div>
+          <a href="https://github.com/vinodm-data/ecommerce-sales-analysis" class="project-link">→ View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-emoji">💳</span>
+          <h3>Credit Card Fraud Detection</h3>
+        </div>
+        <div class="project-body">
+          <p>Built a fraud detection ML pipeline achieving high accuracy on a highly imbalanced real-world dataset.</p>
+          <ul>
+            <li>Handled class imbalance with SMOTE oversampling technique</li>
+            <li>Compared Logistic Regression, Random Forest, and XGBoost</li>
+            <li>Evaluation using Precision, Recall, F1-Score, and ROC-AUC</li>
+            <li>Visualized confusion matrices and feature importance</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">Scikit-learn</span>
+            <span class="tech-chip">Pandas</span>
+            <span class="tech-chip">Matplotlib</span>
+            <span class="tech-chip">SMOTE</span>
+          </div>
+          <a href="https://github.com/vinodm-data/credit-card-fraud-detection" class="project-link">→ View on GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Where I've Worked</div>
+    <h2 class="section-title">Experience</h2>
+    <p class="section-sub">Hands-on industry exposure in data analytics and business intelligence.</p>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Data Analyst Intern</div>
+          <div class="exp-company">Future Code Technologies</div>
+        </div>
+        <div class="exp-date">Jan 2026 – Apr 2026</div>
+      </div>
+      <ul class="exp-list">
+        <li>Analyzed real-time business datasets using SQL and Python to generate actionable insights</li>
+        <li>Built interactive Power BI dashboards for KPI monitoring, sales tracking, and performance reporting</li>
+        <li>Performed data cleaning, preprocessing, and transformation using Pandas and NumPy</li>
+        <li>Automated weekly business reports using Excel and Power BI, improving reporting efficiency</li>
+        <li>Worked on customer behavior analysis and sales forecasting using Machine Learning models</li>
+        <li>Conducted trend analysis and data visualization to support business decision-making</li>
+        <li>Created SQL queries for data extraction, joins, aggregations, and reporting purposes</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <p class="section-sub">I'm actively looking for Data Analyst, Business Analyst, and ML roles. Open to full-time, contract, and remote positions.</p>
+    <div class="contact-grid">
+      <a href="mailto:mopurivinod6788@gmail.com" class="contact-card">
+        <div class="contact-icon blue">📧</div>
+        <div class="contact-info">
+          <h4>Email</h4>
+          <p>mopurivinod6788@gmail.com</p>
+        </div>
+      </a>
+      <a href="tel:+918309818512" class="contact-card">
+        <div class="contact-icon green">📱</div>
+        <div class="contact-info">
+          <h4>Phone</h4>
+          <p>+91 8309818512</p>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/vinodm-data" class="contact-card">
+        <div class="contact-icon blue">💼</div>
+        <div class="contact-info">
+          <h4>LinkedIn</h4>
+          <p>linkedin.com/in/vinodm-data</p>
+        </div>
+      </a>
+      <a href="https://github.com/vinodm-data" class="contact-card">
+        <div class="contact-icon purple">🐙</div>
+        <div class="contact-info">
+          <h4>GitHub</h4>
+          <p>github.com/vinodm-data</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with ❤️ by <span>Vinod M</span> · Data Analyst · Hyderabad, India</p>
+</footer>
+
+</body>
+</html>
